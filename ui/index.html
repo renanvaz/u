@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang='pt-br'>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    
+    <!-- https://developer.mozilla.org/pt-PT/docs/utilizando_meta_tags -->
+    <!-- https://developer.mozilla.org/pt-BR/docs/Mozilla/Mobile/Viewport_meta_tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts/font-awesome-4.2.0/css/font-awesome.min.css">
+    <style type="text/css">
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+        
+        .gray {
+            color: #7d7d7d;
+        }
+
+        body {
+            font-family: 'Arial';
+        }
+
+        header {
+            padding: 10px 0;
+        }
+        
+        .content {
+            padding: 10px;
+        }
+
+        .title-weight1 {
+            font-size: 25px;
+        }
+
+        .title-weight2 {
+            font-size: 18px;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .fa {
+            font-size: 20px;
+        }
+
+        .title-detail h1 {
+            width: 15%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .title-detail::after {
+            width: 80%;
+            height: 3px;
+            margin-left: 4%;
+            display: inline-block;
+            vertical-align: middle;
+            content: "";
+            background-color: #e5e4e4;
+        }
+
+        .wrapper {
+            width: 90%;
+            padding: 0 1%;
+            margin: 0 auto;
+        }
+        
+        .main-header .logo {
+            font: 15px 'Arial';
+            display: block;
+            height: 100%;
+        }
+        
+        .main-header .first {
+            display: inline-block;
+            text-indent: -1px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .graphics {
+            
+        }
+        
+        .container-test {
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .container-test header {
+            position: relative;
+            z-index: 1;
+            background-color: #dbd9d9;
+        }
+
+        .container-test header .fa {
+            margin: 0px 10px;
+            width: 20px;
+        }
+
+        .container-test h1 {
+            display: inline-block;
+        }
+
+        .container-test .content {
+            position: relative;
+            z-index: 0;
+            margin-top: -20px;
+            border-bottom: 5px solid #C8C7C7;
+        }
+        
+        .container-test.open .content {
+            margin-top: 0;
+        }
+
+        .container-test .content.height-fake {
+            height: 200px;
+        }
+
+    </style>
+    <!-- Scripts -->
+    <script src="js/externos/moderniz.js"></script>
+
+</head>
+<body>
+
+    <!-- Your code begin here -->
+    <div class="wrapper">
+        <header class="main-header">
+            <h1>
+            <a class="logo" href=""><span class="first">U.PHP</span><br />Unit Test Library</a>
+            </h1>
+        </header>
+        <section id="main">
+            <section class="graphics">
+                <header class="title-detail">
+                    <h1 class="title-weight1">Graphics</h1>
+                </header>
+                <section class="content"></section>
+            </section>
+            <section class="tests">
+                <header class="title-detail">    
+                    <h1 class="title-weight1">Tests</h1>
+                </header>
+                <article class="container-test">
+                    <header>
+                        <span class="fa fa-check green"></span>
+                        <h1 class="title-weight2">Title tests</h1>
+                        <a class="fa fa-plus right gray"></a>
+                    </header>
+                    <section class="content">
+                        <p></p>
+                    </section>
+                </article>
+                <article class="container-test open">
+                    <header>
+                        <span class="fa fa-times red"></span>
+                        <h1 class="title-weight2">Title tests</h1>
+                        <a class="fa fa-minus right gray"></a>
+                    </header>
+                    <section class="content height-fake">
+                        <p></p>
+                    </section>
+                </article>
+            </section>
+        </section>
+        <footer class="main-footer">
+
+        </footer>
+    </div>
+    <!-- Your code begin here -->
+
+    <!-- Scripts -->
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js" ></script> -->
+    <script src="js/main.js"></script>
+    
+</body>
+</html>
