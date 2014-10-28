@@ -15,6 +15,7 @@ class UCore {
         foreach ($reports['reports'] as &$report) {
             if (isset($report['reports'])) {
                 $report = self::proccess($report);
+
                 if (!$report['status']) {
                     $status = FALSE;
                 }

@@ -8,5 +8,6 @@ require_once('U.php');
 
 UCore::init();
 UCore::load('examples/Core.u.php');
+UCore::load('examples/HTTP.u.php');
 
-echo UCore::view('ui/index.php', ['reports' => UCore::proccess(U::$_reports['reports'][0])]);
+echo UCore::view('ui/index.php', ['reports' => UCore::proccess(U::$_reports)]);

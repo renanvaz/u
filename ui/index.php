@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="ui/css/reset.css" />
     <link rel="stylesheet" href="ui/css/fonts/font-awesome-4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700" type="text/css">
     <style type="text/css">
@@ -125,6 +124,7 @@
             font-family: 'Open Sans', sans-serif;
             color: #333;
             font-size: 13px;
+            padding-bottom: 30px;
         }
 
         header {
@@ -167,7 +167,6 @@
         .wrapper > header .logo {
             font: 15px 'Arial';
             display: block;
-            height: 100%;
         }
 
         .wrapper > header .first {
@@ -187,10 +186,15 @@
             border: solid 1px #ddd;
         }
 
+        .container-test:first-child {
+            margin-top: 0px;
+        }
+
         .container-test header {
             position: relative;
             z-index: 1;
             background-color: #f5f5f5;
+            cursor: pointer;
         }
 
         .container-test header h1{
@@ -210,7 +214,12 @@
         .container-test .content {
             position: relative;
             z-index: 0;
-            padding: 25px;
+            padding: 0 25px;
+            height: 0;
+
+            -webkit-transition: all .4s ease-out;
+            -o-transition: all .4s ease-out;
+            transition: all .4s ease-out;
         }
 
         .container-test.open > header {
@@ -218,36 +227,41 @@
         }
 
         .container-test.open > .content {
-
+            padding: 25px;
+            height: auto;
         }
 
         .container-test .content > div {
             font-size: 16px;
             padding: 5px 0;
             border-top: solid 1px #ddd;
+        }
 
+        .container-test .content > [u-error] {
+            cursor: pointer;
+        }
+
+        .container-test .content > div.open .snippet {
+            height: 140px;
         }
 
         .container-test .content > div:first-child {
             border-top: solid 0px;
         }
 
-        .container-test .content > div:hover .snippet {
-            max-height: 140px;
-        }
-
         .snippet {
             position: relative;
             top: 5px;
             overflow: hidden;
-            max-height: 0px;
+            height: 0px;
 
-            -webkit-transition: max-height .4s ease-out;
-            -o-transition: max-height .4s ease-out;
-            transition: max-height .4s ease-out;
+            -webkit-transition: height .4s ease-out;
+            -o-transition: height .4s ease-out;
+            transition: height .4s ease-out;
         }
 
         .snippet p {
+            font-family: 'Courier New';
             font-size: 13px !important;
         }
 
@@ -295,12 +309,45 @@
                     <h1>Report</h1>
                 </header>
 
-                <?php echo UCore::view('ui/group.php', ['reports' => $reports]); ?>
+                <?php foreach ($reports['reports'] as $report): ?>
+                <?php echo UCore::view('ui/group.php', ['reports' => $report]); ?>
+                <?php endforeach; ?>
             </section>
         </section>
         <footer class="main-footer">
 
         </footer>
     </div>
+
+    <script>
+        var groups = document.querySelectorAll('.container-test header');
+        var errorsItems = document.querySelectorAll('.container-test .content > [u-error]');
+        var i;
+
+        for (i = 0; i < groups.length; i++) {
+            groups[i].addEventListener('click', function(e){
+                var group = e.currentTarget.parentNode;
+                var section = group.querySelector('section');
+
+                if (group.classList.contains('open')) {
+                    group.classList.remove('open');
+                    section.style.height = 0;
+                } else {
+                    group.classList.add('open');
+                    section.style.height = 'auto';
+                }
+            });
+        }
+
+
+
+        for (i = 0; i < errorsItems.length; i++) {
+            errorsItems[i].addEventListener('click', function(e){
+                var item = e.currentTarget;
+
+                item.classList.toggle('open');
+            });
+        }
+    </script>
 </body>
 </html>

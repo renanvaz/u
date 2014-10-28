@@ -9,7 +9,7 @@
             <?php if (isset($report['reports'])): ?>
                 <?php echo UCore::view('ui/group.php', ['reports' => $report]); ?>
             <?php else: ?>
-                <div>
+                <div <?php echo $report['status'] ? 'u-pass' : 'u-error'; ?>>
                     <span class="fa <?php echo $report['status'] ? 'fa-check green' : 'fa-times red'; ?>"></span> <?php echo $report['description']; ?>
                     <?php if (!$report['status']): ?>
                         <div class="snippet"><?php echo UCore::getSnippet($report['trace']['file'], $report['trace']['line']); ?></div>
