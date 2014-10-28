@@ -1,3 +1,0 @@
-addEvent(window, 'load', function(){
-
-});

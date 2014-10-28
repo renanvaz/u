@@ -6,6 +6,7 @@ error_reporting(E_ALL | E_STRICT);
 
 require_once('U.php');
 
-U::init();
-U::load('Core.u.php');
-U::output();
+UCore::init();
+UCore::load('examples/Core.u.php');
+
+echo UCore::view('ui/index.php', ['reports' => UCore::proccess(U::$_reports['reports'][0])]);
