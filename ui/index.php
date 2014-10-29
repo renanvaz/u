@@ -231,6 +231,9 @@
 
         .container-test .content > div > .fa {
             display: none;
+            font-size: 14px;
+            position: relative;
+            top: -1px;
         }
 
         .container-test .content > div {
@@ -239,7 +242,7 @@
             border-top: solid 1px #ddd;
         }
 
-        .container-test .content > [u-error] {
+        .container-test .content > div[u-error] {
             cursor: pointer;
         }
 
@@ -249,6 +252,19 @@
 
         .container-test .content > [u-pass] > .fa-check {
             display: inline-block;
+        }
+
+        .container-test .content > [u-error] > .hover-legend {
+            display: none;
+        }
+
+        .container-test .content > [u-error]:hover > .hover-legend {
+            display: inline-block;
+            font-size: 12px;
+            position: relative;
+            top: -2px;
+            margin-left: 10px;
+            color: #999;
         }
 
         .container-test .content > div.open .snippet {
@@ -330,6 +346,7 @@
         var groups = document.querySelectorAll('.container-test');
         var errorsItems = document.querySelectorAll('.container-test > .content > div[u-error]');
         var i;
+        var to;
 
         for (i = 0; i < groups.length; i++) {
             groups[i].querySelector('header').addEventListener('click', function(e){
@@ -354,10 +371,18 @@
         }
 
         for (i = 0; i < errorsItems.length; i++) {
-            errorsItems[i].addEventListener('click', function(e){
+            errorsItems[i].addEventListener('mouseover', function(e){
                 var item = e.currentTarget;
 
-                item.classList.toggle('open');
+                clearTimeout(to);
+                to = setTimeout(function(item){ item.classList.add('open'); }, 400, item);
+            });
+
+            errorsItems[i].addEventListener('mouseleave', function(e){
+                var item = e.currentTarget;
+
+                clearTimeout(to);
+                item.classList.remove('open');
             });
         }
     </script>

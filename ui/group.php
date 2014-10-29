@@ -16,7 +16,7 @@
                     <span class="fa fa-check green"></span>
                     <?php echo $report['description']; ?>
                     <?php if (!$report['status']): ?>
-                        <div class="snippet"><?php echo UCore::getSnippet($report['trace']['file'], $report['trace']['line']); ?></div>
+                    <div class="snippet"><?php echo UCore::getSnippet($report['trace']['file'], $report['trace']['line']); ?></div>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
