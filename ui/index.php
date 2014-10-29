@@ -24,18 +24,7 @@
         Twitter: @rich_clark
         */
 
-        html, body, div, span, object, iframe,
-        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-        abbr, address, cite, code,
-        del, dfn, em, img, ins, kbd, q, samp,
-        small, strong, sub, sup, var,
-        b, i,
-        dl, dt, dd, ol, ul, li,
-        fieldset, form, label, legend,
-        table, caption, tbody, tfoot, thead, tr, th, td,
-        article, aside, canvas, details, figcaption, figure,
-        footer, header, hgroup, menu, nav, section, summary,
-        time, mark, audio, video {
+        * {
             margin:0;
             padding:0;
             border:0;
@@ -190,21 +179,30 @@
             margin-top: 0px;
         }
 
-        .container-test header {
+        .container-test > header {
             position: relative;
             z-index: 1;
             background-color: #f5f5f5;
             cursor: pointer;
         }
 
-        .container-test header h1{
+        .container-test > header > h1{
             font-size: 18px;
             font-weight: normal;
         }
 
-        .container-test header .fa {
+        .container-test > header > .fa {
             margin: 0px 10px;
             width: 20px;
+            display: none;
+        }
+
+        .container-test.open > header > .fa-plus {
+            display: none;
+        }
+
+        .container-test.open > header > .fa-minus, .container-test > header > .fa-plus, .container-test[u-error] > header > .fa-times, .container-test[u-pass] > header > .fa-check {
+            display: inline-block;
         }
 
         .container-test h1 {
@@ -215,7 +213,7 @@
             position: relative;
             z-index: 0;
             padding: 0 25px;
-            height: 0;
+            height: 0px;
 
             -webkit-transition: all .4s ease-out;
             -o-transition: all .4s ease-out;
@@ -231,6 +229,10 @@
             height: auto;
         }
 
+        .container-test .content > div > .fa {
+            display: none;
+        }
+
         .container-test .content > div {
             font-size: 16px;
             padding: 5px 0;
@@ -239,6 +241,14 @@
 
         .container-test .content > [u-error] {
             cursor: pointer;
+        }
+
+        .container-test .content > [u-error] > .fa-times {
+            display: inline-block;
+        }
+
+        .container-test .content > [u-pass] > .fa-check {
+            display: inline-block;
         }
 
         .container-test .content > div.open .snippet {
@@ -282,9 +292,6 @@
         }
 
     </style>
-    <!-- Scripts -->
-    <script src="js/externos/moderniz.js"></script>
-
 </head>
 <body>
 
@@ -320,26 +327,31 @@
     </div>
 
     <script>
-        var groups = document.querySelectorAll('.container-test header');
-        var errorsItems = document.querySelectorAll('.container-test .content > [u-error]');
+        var groups = document.querySelectorAll('.container-test');
+        var errorsItems = document.querySelectorAll('.container-test > .content > div[u-error]');
         var i;
 
         for (i = 0; i < groups.length; i++) {
-            groups[i].addEventListener('click', function(e){
+            groups[i].querySelector('header').addEventListener('click', function(e){
                 var group = e.currentTarget.parentNode;
                 var section = group.querySelector('section');
 
                 if (group.classList.contains('open')) {
+                    section.style.height = (section.scrollHeight - 50)+'px';
+                    setTimeout(function(section){ section.style.height = '0px'; }, 0, section);
                     group.classList.remove('open');
-                    section.style.height = 0;
                 } else {
                     group.classList.add('open');
-                    section.style.height = 'auto';
+                    section.style.height = section.scrollHeight+'px';
+
+                    section.addEventListener('transitionend', function(e){
+                        if (e.currentTarget.style.height !== '0px') {
+                            e.currentTarget.style.height = 'auto';
+                        }
+                    });
                 }
             });
         }
-
-
 
         for (i = 0; i < errorsItems.length; i++) {
             errorsItems[i].addEventListener('click', function(e){
