@@ -3,16 +3,8 @@
 require_once 'UCore.php';
 
 class U {
-    public static $_reports = ['reports' => []];
+    private static $_report = ['report' => []];
     private static $_pointer;
-
-    /**
-     * Init the U pointer
-     * @return void
-     */
-    public static function init () {
-        self::$_pointer = &self::$_reports;
-    }
 
     /**
      * Register status of test
@@ -21,16 +13,15 @@ class U {
      * @return void
      */
     public static function assert ($description, $status) {
+        $trace = debug_backtrace()[0];
+
         $report = [
-            'description' => $description,
-            'status' => $status
+            'description'   => $description,
+            'status'        => !!$status,
+            'trace'         => self::_getSnippet($trace['file'], $trace['line'])
         ];
 
-        if ($status === FALSE) {
-            $report['trace'] = debug_backtrace()[0];
-        }
-
-        self::$_pointer['reports'][] = $report;
+        self::$_pointer['report'][] = $report;
     }
 
     /**
@@ -40,14 +31,51 @@ class U {
      * @return void
      */
     public static function group ($description, $fn) {
-        $newGroup = ['description' => $description, 'reports' => []];
+        if (!self::$_pointer) { self::$_pointer = &self::$_report; }
+
+        $newGroup = ['description' => $description, 'report' => []];
         $pointer = &self::$_pointer;
 
         self::$_pointer = &$newGroup;
-        $pointer['reports'][] = &self::$_pointer;
+        $pointer['report'][] = &self::$_pointer;
 
         $fn();
 
         self::$_pointer = &$pointer;
+    }
+
+    /**
+     * Get the test result in a array data
+     * @return array
+     */
+    public static function getReport () {
+        return self::$_report;
+    }
+
+    /**
+     * Get the file contents of a specific line
+     * @param  string  $file
+     * @param  integer $line
+     * @return string
+     */
+    private static function _getSnippet ($file, $line) {
+        $handle = fopen($file, 'r');
+        $snippet = [];
+
+        if ($handle) {
+            $l = 1;
+            $pad = strlen($line);
+
+            while (($fileline = fgets($handle)) !== false) {
+                if ($l >= $line-4 AND $l <= $line+1) {
+                    $snippet[] = ['highlight' => ($l == $line), 'line' => $l, 'code' => htmlentities($fileline)];
+                }
+                $l++;
+            }
+        }
+
+        fclose($handle);
+
+        return $snippet;
     }
 }

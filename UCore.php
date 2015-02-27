@@ -5,9 +5,6 @@ class UCore {
      * Init the U pointer
      * @return void
      */
-    public static function init () {
-        U::init();
-    }
 
     public static function proccess ($reports) {
         $status = TRUE;
@@ -43,30 +40,11 @@ class UCore {
     }
 
     /**
-     * Get the file contents of a specific line
-     * @param  string  $file
-     * @param  integer $line
+     * Get test result in a JSON string
      * @return string
      */
-    public static function getSnippet ($file, $line) {
-        $handle = fopen($file, 'r');
-        $snippet = '';
-
-        if ($handle) {
-            $l = 1;
-            $pad = strlen($line);
-
-            while (($fileline = fgets($handle)) !== false) {
-                if ($l >= $line-4 AND $l <= $line+1) {
-                    $snippet .= '<p'.($l == $line ? ' class="highlight"' : '').'><span>'.$l.'</span>'.str_replace(['\n', ' ', '\t'], ['\n', '&nbsp;', '&nbsp;&nbsp;&nbsp;&nbsp;'], htmlentities($fileline)).'</p>';
-                }
-                $l++;
-            }
-        }
-
-        fclose($handle);
-
-        return $snippet;
+    public static function getJSON () {
+        return json_encode(U::getReport());
     }
 
     /**
