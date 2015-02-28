@@ -48,6 +48,16 @@ class UCore {
     }
 
     /**
+     * Get test result in a JSON string
+     * @return string
+     */
+    public static function getInfo () {
+        $report = U::getReport();
+
+        return [''];
+    }
+
+    /**
      * Load a view
      * @param  string $filename
      * @param  array $data
