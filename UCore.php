@@ -40,21 +40,19 @@ class UCore {
     }
 
     /**
-     * Get test result in a JSON string
-     * @return string
+     * Get test result in a boolean status
+     * @return boolean
      */
-    public static function getJSON () {
-        return json_encode(U::getReport());
+    public static function getBool () {
+        return !U::getReport()['summary']['nok'];
     }
 
     /**
      * Get test result in a JSON string
      * @return string
      */
-    public static function getInfo () {
-        $report = U::getReport();
-
-        return [''];
+    public static function getJSON () {
+        return json_encode(U::getReport());
     }
 
     /**

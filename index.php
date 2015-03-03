@@ -9,3 +9,4 @@ require_once('U.php');
 UCore::load('examples/Core.u.php');
 
 echo UCore::getJSON();
+

@@ -3,7 +3,7 @@
 require_once 'UCore.php';
 
 class U {
-    private static $_report = ['report' => []];
+    private static $_report = ['summary' => ['asserts' => 0, 'nok' => 0, 'ok' => 0], 'report' => []];
     private static $_pointer;
 
     /**
@@ -20,6 +20,10 @@ class U {
             'status'        => !!$status,
             'trace'         => self::_getSnippet($trace['file'], $trace['line'])
         ];
+
+        self::$_report['summary']['asserts']++;
+        !!$status AND self::$_report['summary']['ok']++;
+        !$status  AND self::$_report['summary']['nok']++;
 
         self::$_pointer['report'][] = $report;
     }
