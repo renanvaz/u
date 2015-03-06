@@ -6,6 +6,8 @@ class UCore {
      * @return void
      */
 
+    public static function test () { return 'U TEST '; }
+
     public static function proccess ($reports) {
         $status = TRUE;
 
