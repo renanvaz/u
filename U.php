@@ -72,7 +72,7 @@ class U {
 
             while (($fileline = fgets($handle)) !== false) {
                 if ($l >= $line-4 AND $l <= $line+1) {
-                    $snippet[] = ['highlight' => ($l == $line), 'line' => $l, 'code' => htmlentities($fileline)];
+                    $snippet[] = ['highlight' => ($l == $line), 'line' => $l, 'code' => preg_replace('/ /', '&nbsp;', htmlentities($fileline))];
                 }
                 $l++;
             }
