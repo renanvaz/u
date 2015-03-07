@@ -1,6 +1,6 @@
 <?php
 
-require_once 'UCore.php';
+namespace \ULib;
 
 class U {
     private static $_report = ['summary' => ['asserts' => 0, 'nok' => 0, 'ok' => 0], 'report' => []];

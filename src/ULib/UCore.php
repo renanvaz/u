@@ -1,5 +1,7 @@
 <?php
 
+namespace \ULib;
+
 class UCore {
     /**
      * Init the U pointer
