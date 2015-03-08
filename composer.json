@@ -8,7 +8,7 @@
             "email": "renan.c.vaz@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "u",
     "require": {
         "php": ">=5.4.0"
     },
