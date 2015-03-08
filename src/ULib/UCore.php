@@ -1,14 +1,14 @@
 <?php
 
-namespace \ULib;
+namespace ULib;
+
+require_once('U.php');
 
 class UCore {
     /**
      * Init the U pointer
      * @return void
      */
-
-    public static function test () { return 'U TEST '; }
 
     public static function proccess ($reports) {
         $status = TRUE;

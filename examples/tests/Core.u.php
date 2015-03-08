@@ -1,5 +1,7 @@
 <?php
 
+use ULib\U;
+
 U::group('Description of this group test.', function(){
     U::assert('Testando', FALSE);
     U::assert('Testando denovo', TRUE);

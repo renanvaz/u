@@ -1,9 +1,10 @@
 <?php
 
-namespace \ULib;
+namespace ULib;
 
 class U {
-    private static $_report = ['summary' => ['asserts' => 0, 'nok' => 0, 'ok' => 0], 'report' => []];
+    // Data, time
+    private static $_report = ['summary' => ['asserts' => ['nok' => 0, 'ok' => 0], 'time' => 0], 'report' => []];
     private static $_pointer;
 
     /**
@@ -22,8 +23,8 @@ class U {
         ];
 
         self::$_report['summary']['asserts']++;
-        !!$status AND self::$_report['summary']['ok']++;
-        !$status  AND self::$_report['summary']['nok']++;
+        !!$status AND self::$_report['summary']['asserts']['ok']++;
+        !$status  AND self::$_report['summary']['asserts']['nok']++;
 
         self::$_pointer['report'][] = $report;
     }
