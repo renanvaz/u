@@ -21,7 +21,7 @@ class UCore {
      * @return boolean
      */
     public static function getBool () {
-        return !U::getReport()['summary']['nok'];
+        return !U::getReport()['summary']['asserts']['nok'];
     }
 
     /**

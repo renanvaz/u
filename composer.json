@@ -8,10 +8,10 @@
             "email": "renan.c.vaz@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0"
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
             "ULib\\": "src/"
