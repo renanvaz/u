@@ -4,8 +4,17 @@ namespace ULib;
 
 class U {
     // Data, time
-    private static $_report = ['summary' => ['asserts' => ['nok' => 0, 'ok' => 0], 'time' => 0], 'report' => []];
+    private static $_report;
     private static $_pointer;
+
+    /**
+     * Reset the report and pointer
+     * @return void
+     */
+    public static function reset () {
+        self::$_report = ['summary' => ['asserts' => ['nok' => 0, 'ok' => 0], 'time' => 0], 'report' => []];
+        self::$_pointer = &self::$_report;
+    }
 
     /**
      * Register status of test
@@ -36,7 +45,7 @@ class U {
      * @return void
      */
     public static function group ($description, $fn) {
-        if (!self::$_pointer) { self::$_pointer = &self::$_report; }
+        if (!self::$_pointer) { self::reset(); }
 
         $newGroup = ['description' => $description, 'report' => []];
         $pointer = &self::$_pointer;

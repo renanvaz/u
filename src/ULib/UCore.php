@@ -2,9 +2,15 @@
 
 namespace ULib;
 
-require_once('U.php');
-
 class UCore {
+    /**
+     * Reset the report and pointer
+     * @return void
+     */
+    public static function reset () {
+        U::reset();
+    }
+
     /**
      * Load a file with tests and create a group for this
      * @param  string $file Filename relative or absolute
