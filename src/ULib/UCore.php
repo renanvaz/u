@@ -18,7 +18,7 @@ class UCore {
      */
     public static function load ($file) {
         U::group('Test '.$file, function () use ($file) {
-            require_once($file);
+            require($file);
         });
     }
 
