@@ -17,9 +17,13 @@ class UCore {
      * @return void
      */
     public static function load ($file) {
-        U::group('Test '.$file, function () use ($file) {
-            require($file);
-        });
+        if (file_exists($file)) {
+            U::group('Test '.$file, function () use ($file) {
+                require($file);
+            });
+        } else {
+            throw new \Exception('Error on loading "'.$file.'" file.');
+        }
     }
 
     /**
