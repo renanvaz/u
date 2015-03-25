@@ -47,6 +47,10 @@ class U {
     public static function group ($description, $fn) {
         if (!self::$_pointer) { self::reset(); }
 
+        if (is_string($description)) {
+            $description = ['title' => $description, 'description' => ''];
+        }
+
         $newGroup = ['description' => $description, 'report' => []];
         $pointer = &self::$_pointer;
 
