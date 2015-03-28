@@ -40,14 +40,21 @@ class U {
 
     /**
      * Create a group (or a sub group) of asserts with a description
-     * @param  string $description
+     * @param  string $title
+     * @param  string $description OR function $fn
      * @param  function $fn
      * @return void
      */
-    public static function group ($description, $fn) {
+    public static function group () {
+        $args = func_get_args();
+
+        $title = $args[0];
+        $description = isset($args[2]) ? $args[1] : '';
+        $fn = isset($args[2]) ? $args[2] : $args[1];
+
         if (!self::$_pointer) { self::reset(); }
 
-        $newGroup = ['description' => $description, 'report' => []];
+        $newGroup = ['title' => $title, 'description' => $description, 'report' => []];
         $pointer = &self::$_pointer;
 
         self::$_pointer = &$newGroup;
