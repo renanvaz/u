@@ -55,6 +55,7 @@ class U {
         if (!self::$_pointer) { self::reset(); }
 
         $newGroup = ['title' => $title, 'description' => $description, 'report' => []];
+
         $pointer = &self::$_pointer;
 
         self::$_pointer = &$newGroup;
