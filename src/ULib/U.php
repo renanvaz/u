@@ -22,11 +22,11 @@ class U {
      * @param  boolean $status
      * @return void
      */
-    public static function assert ($description, $status) {
+    public static function assert ($title, $status) {
         $trace = debug_backtrace()[0];
 
         $report = [
-            'description'   => $description,
+            'title'         => $title,
             'status'        => !!$status,
             'trace'         => self::_getSnippet($trace['file'], $trace['line'])
         ];
